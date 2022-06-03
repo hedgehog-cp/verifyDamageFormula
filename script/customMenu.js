@@ -2,6 +2,8 @@
  * @file このファイルはカスタムメニューを扱います。
  */
 
+/** @OnlyCurrentDoc */
+
 /**
  * @brief スプレッドシートのオープンをトリガに、メニューバーにカスタムメニューを追加します。
  * @see addMenu::createIndex()
