@@ -2,21 +2,15 @@
  * @file このファイルはカスタムメニューを扱います。
  */
 
-/** @OnlyCurrentDoc */
-
 /**
  * @brief スプレッドシートのオープンをトリガに、メニューバーにカスタムメニューを追加します。
  * @see addMenu::createIndex()
+ * @OnlyCurrentDoc 
  */
-function onOpen(event) {
-  let menuItems = [{
-      name: '目次作成',
-      functionName: 'createIndex'
-    },
-    {
-      name: '行サイズを調整する',
-      functionName: 'adjustRowSize'
-    }
+ function onOpen(event) {
+  let menuItems = [
+    { name: '目次作成', functionName: 'createIndex' },
+    { name: '行サイズを調整する', functionName : 'adjustRowSize'}
   ];
   let sheet = SpreadsheetApp.getActiveSpreadsheet();
   sheet.addMenu('スクリプト', menuItems);
@@ -27,6 +21,7 @@ function onOpen(event) {
  * @module 目次作成(選択したセル以下に、縦に出力する)
  * @return =hyperlink("#gid=***", "シート名")
  * @see addMenu::onOpen()
+ * @OnlyCurrentDoc 
  */
 function createIndex() {
 
@@ -62,6 +57,7 @@ function createIndex() {
 /**
  * @brief 定義したシート名と合致するシートの行サイズを変更します。
  * @see addMenu::createIndex()
+ * @OnlyCurrentDoc 
  */
 function adjustRowSize() {
 
@@ -74,7 +70,7 @@ function adjustRowSize() {
   // メッセージボックスの作成と表示, 入力受付
   const message = `シート${adjustTargetSheets.join(', ')}の行サイズを拡張または縮小します。\\n目標の行サイズを半角の自然数で入力してください。\\n${MIN}以下または${MAX}以上の場合は何もしません。`;
   const targetRowSize = Number(Browser.inputBox(message));
-
+  
   // 例外処理
   if (targetRowSize <= MIN || targetRowSize >= MAX) return;
 
@@ -92,7 +88,7 @@ function adjustRowSize() {
 
     // 走査中のシートが「調整したいシートの名前」であるか
     if (adjustTargetSheets.includes(nameList[i])) {
-
+      
       // 調整したいシートの行サイズ
       const currentRowSize = sheets[i].getMaxRows();
 
