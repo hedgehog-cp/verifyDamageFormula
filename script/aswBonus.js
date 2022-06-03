@@ -74,10 +74,10 @@ class AswAttacker {
   }
 
   /**
-  * @method getGearPictureBook 与えた装備IDの図鑑表示IDを返す
-  * @param {number} id 装備ID
-  * @return {number} 装備の図鑑表示IDを返す
-  */
+   * @method getGearPictureBook 与えた装備IDの図鑑表示IDを返す
+   * @param {number} id 装備ID
+   * @return {number} 装備の図鑑表示IDを返す
+   */
   static getGearPictureBook(id) {
     const pictureBookIndex = 1;
     const gearIndex = AswAttacker.binarySearch(id, api_mst_slotitem.map(item => item.api_id));
@@ -85,10 +85,10 @@ class AswAttacker {
   };
 
   /**
-  * @method getGearCategory 与えた装備IDのカテゴリIDを返す
-  * @param {number} id 装備ID
-  * @return {number} 装備のカテゴリIDを返す
-  */
+   * @method getGearCategory 与えた装備IDのカテゴリIDを返す
+   * @param {number} id 装備ID
+   * @return {number} 装備のカテゴリIDを返す
+   */
   static getGearCategory(id) {
     const categoryIndex = 2;
     const gearIndex = AswAttacker.binarySearch(id, api_mst_slotitem.map(item => item.api_id));
@@ -96,20 +96,20 @@ class AswAttacker {
   };
 
   /**
-  * @method getGearSakuValue 与えた装備IDの装備索敵値を返す
-  * @param {number} id 装備ID
-  * @return {number} 装備索敵値を返す
-  */
+   * @method getGearSakuValue 与えた装備IDの装備索敵値を返す
+   * @param {number} id 装備ID
+   * @return {number} 装備索敵値を返す
+   */
   static getGearSakuValue(id) {
     const gearIndex = AswAttacker.binarySearch(id, api_mst_slotitem.map(item => item.api_id));
     return api_mst_slotitem[gearIndex].api_saku;
   };
 
   /**
-  * @method isSurfaceRadar 与えた装備IDが水上電探であるか検証する
-  * @param {number} id 装備ID
-  * @return {boolean} 水上電探であればtrue、そうでなければfalseを返す
-  */
+   * @method isSurfaceRadar 与えた装備IDが水上電探であるか検証する
+   * @param {number} id 装備ID
+   * @return {boolean} 水上電探であればtrue、そうでなければfalseを返す
+   */
   static isSurfaceRadar(id) {
     // 索敵値 >= 5 ?
     const sakuValue = 5;
@@ -129,31 +129,31 @@ class AswAttacker {
   };
 
   /**
-  * @method isReconSeaplane 与えた装備IDが水上偵察機であるか検証する
-  * @param {number} id 装備ID
-  * @return {boolean} 水上偵察機であればtrue、そうでなければfalseを返す
-  */
+   * @method isReconSeaplane 与えた装備IDが水上偵察機であるか検証する
+   * @param {number} id 装備ID
+   * @return {boolean} 水上偵察機であればtrue、そうでなければfalseを返す
+   */
   static isReconSeaplane(id) {
     const reconSeaplane = GEAR_CATEGORY_ID_MAP['水上偵察機'];
     return AswAttacker.getGearCategory(id) == reconSeaplane;
   };
 
   /**
-  * @method isSeaplaneBomber 与えた装備IDが水上爆撃機であるか検証する
-  * @param {number} id 装備ID
-  * @return {boolean} 水上爆撃機であればtrue、そうでなければfalseを返す
-  */
+   * @method isSeaplaneBomber 与えた装備IDが水上爆撃機であるか検証する
+   * @param {number} id 装備ID
+   * @return {boolean} 水上爆撃機であればtrue、そうでなければfalseを返す
+   */
   static isSeaplaneBomber(id) {
     const seaplaneBomber = GEAR_CATEGORY_ID_MAP['水上爆撃機'];
     return AswAttacker.getGearCategory(id) == seaplaneBomber;
   };
 
   /**
-  * [未使用]
-  * @method isJapaneseDepthChargeProjector 与えた装備IDが国産爆雷投射機であるか検証する
-  * @param {number} id 装備ID
-  * @return {boolean} 国産爆雷投射機であればtrue、そうでなければfalseを返す
-  */
+   * [未使用]
+   * @method isJapaneseDepthChargeProjector 与えた装備IDが国産爆雷投射機であるか検証する
+   * @param {number} id 装備ID
+   * @return {boolean} 国産爆雷投射機であればtrue、そうでなければfalseを返す
+   */
   /*
     static isJapaneseDepthChargeProjector(id) {
       const japaneseDepthChargeProjector = [
@@ -167,10 +167,10 @@ class AswAttacker {
   */
 
   /**
-  * @method isJapaneseSonar 与えた装備IDが国産ソナーであるか検証する
-  * @param {number} id 装備ID
-  * @return {boolean} 国産ソナーであればtrue、そうでなければfalseを返す
-  */
+   * @method isJapaneseSonar 与えた装備IDが国産ソナーであるか検証する
+   * @param {number} id 装備ID
+   * @return {boolean} 国産ソナーであればtrue、そうでなければfalseを返す
+   */
   static isJapaneseSonar(id) {
     const japaneseSonar = [
       GEAR_ID_MAP['九三式水中聴音機'],
@@ -183,20 +183,20 @@ class AswAttacker {
   }
 
   /**
-  * @method isAutogyro 与えた装備IDがオートジャイロであるか検証する
-  * @param {number} id 装備ID
-  * @return {boolean} オートジャイロであればtrue、そうでなければfalseを返す
-  */
+   * @method isAutogyro 与えた装備IDがオートジャイロであるか検証する
+   * @param {number} id 装備ID
+   * @return {boolean} オートジャイロであればtrue、そうでなければfalseを返す
+   */
   static isAutogyro(id) {
     const autogyro = GEAR_PICTURE_BOOK_ID_MAP['オートジャイロ'];
     return AswAttacker.getGearPictureBook(id) == autogyro;
   }
 
   /**
-  * @method isAutogyro 与えた装備IDが回転翼機であるか検証する
-  * @param {number} id 装備ID
-  * @return {boolean} 回転翼機であればtrue、そうでなければfalseを返す
-  */
+   * @method isAutogyro 与えた装備IDが回転翼機であるか検証する
+   * @param {number} id 装備ID
+   * @return {boolean} 回転翼機であればtrue、そうでなければfalseを返す
+   */
   static isHelicopter(id) {
     const helicopter = GEAR_PICTURE_BOOK_ID_MAP['回転翼機'];
     return AswAttacker.getGearPictureBook(id) == helicopter;
@@ -310,6 +310,13 @@ function getAswBonus(attacker) {
     }
   }
 
+  // 229  https://wikiwiki.jp/kancolle/12.7cm単装高角砲%28後期型%29
+  if (gearCount('12.7cm単装高角砲(後期型)')) {
+    if (attacker.name == '雪風改二') {
+      attacker.aswBonus += 2 * num;
+    }
+  }
+
   // 287  https://wikiwiki.jp/kancolle/三式爆雷投射機%20集中配備
   if (num = gearCount('三式爆雷投射機 集中配備')) {
     if (attacker.ctype == '香取型' || attacker.name == '能代改二') {
@@ -416,6 +423,20 @@ function getAswBonus(attacker) {
       attacker.aswBonus += 2 * num;
     } else if (['龍鳳改', '祥鳳改'].includes(attacker.name)) {
       attacker.aswBonus += num;
+    }
+  }
+
+  // 346 https://wikiwiki.jp/kancolle/二式12cm迫撃砲改
+  if (num = gearCount('二式12cm迫撃砲改')) {
+    if (attacker.yomi == 'やましおまる') {
+      attacker.aswBonus += num;
+    }
+  }
+
+  // 347 https://wikiwiki.jp/kancolle/二式12cm迫撃砲改%20集中配備
+  if (num = gearCount('二式12cm迫撃砲改 集中配備')) {
+    if (attacker.yomi == 'やましおまる') {
+      attacker.aswBonus += 2 * num;
     }
   }
 
@@ -631,6 +652,22 @@ function getAswBonus(attacker) {
     } else if (['駆逐艦', '軽巡洋艦', '練習巡洋艦'].includes(attacker.stype)) {
       attacker.aswBonus += 1;
     }
+  }
+
+  // 447  https://wikiwiki.jp/kancolle/零式艦戦64型%28複座KMX搭載機%29
+  if (num = gearCount('零式艦戦64型(複座KMX搭載機)')) {
+    if (['ほうしょう', 'たいげい・りゅうほう'].includes(attacker.yomi)) {
+      attacker.aswBonus += 2 * num;
+    }
+    if (attacker.yomi == 'うんよう') {
+      attacker.aswBonus += 1 * num;
+    }
+    if (attacker.ctype == '大鷹型') {
+      attacker.aswBonus += 1 * num;
+    }
+    const rf = gearFilteredRf('零式艦戦64型(複座KMX搭載機)');
+    attacker.aswBonus += rf.reduce((v1, v2) => v1 + (v2 >= 6 ? 1 : 0), 0);
+    attacker.aswBonus += rf.reduce((v1, v2) => v1 + (v2 >= 10 ? 1 : 0), 0);
   }
 
   // 451 https://wikiwiki.jp/kancolle/三式指揮連絡機改

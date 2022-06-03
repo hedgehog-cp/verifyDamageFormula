@@ -51,6 +51,7 @@ const GEAR_PICTURE_BOOK_ID_MAP = {
   "回転翼機": 44,
   "DD戦車": 45,
   "大型陸上機": 46,
+  "武装大発": 47 // 訳不明
 };
 
 // 装備カテゴリ名と装備カテゴリIDの連想配列
@@ -200,7 +201,7 @@ const CLASS_TYPE = [
   { ctype: 109, name: "潜高型", country: "日本" },
   { ctype: 110, name: "Brooklyn級", country: "アメリカ" },
   { ctype: 111, name: "耐氷型雑用輸送艦", country: "日本" },
-  { ctype: 112, name: "Illustrious級", country: "アメリカ" },
+  { ctype: 112, name: "Illustrious級", country: "イギリス" },
   { ctype: 113, name: "Conte di Cavour級", country: "イタリア" },
   { ctype: 114, name: "Gato級", country: "アメリカ" },
   { ctype: 115, name: "特2TL型", country: "日本" }
