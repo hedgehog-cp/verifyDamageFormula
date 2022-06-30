@@ -231,4 +231,8 @@ const api_mst_slotitem_equiptype = [{
   "api_id": 94,
   "api_name": "艦上偵察機（II）",
   "api_show_flg": 0
+}, {
+  "api_id": 95,
+  "api_name": "副砲（II）",
+  "api_show_flg": 0
 }];
