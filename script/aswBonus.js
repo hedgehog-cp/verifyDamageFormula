@@ -43,7 +43,7 @@ class AswAttacker {
     /** @type {boolean} 回転翼機を装備しているか */
     this.isEquipHelicopter = this.gearId.some(id => AswAttacker.isHelicopter(id));
     /** @type {boolean} 二式爆雷を装備しているか */
-    this.isEquipType2DepthCharge = this.gearId.some(id => AswAttacker.isType2DepthCharge(id));
+    //this.isEquipType2DepthCharge = this.gearId.some(id => AswAttacker.isType2DepthCharge(id));
 
     /** @type 対潜装備ボーナス */
     this.aswBonus = 0;
@@ -209,10 +209,12 @@ class AswAttacker {
    * @param {number} id 装備ID
    * @return {boolean} 二式爆雷であればtrue、そうでなければfalseを返す
    */
-  static isType2DepthCharge(id) {
-    const type2DepthCharge = GEAR_ID_MAP['二式爆雷'];
-    return id == type2DepthCharge;
-  }
+  /*
+    static isType2DepthCharge(id) {
+      const type2DepthCharge = GEAR_ID_MAP['二式爆雷'];
+      return id == type2DepthCharge;
+    }
+  */
 }
 
 /**
@@ -300,6 +302,14 @@ function getAswBonus(attacker) {
     }
   }
 
+  // 132  https://wikiwiki.jp/kancolle/零式水中聴音機
+  if (num = gearCount('零式水中聴音機')) {
+    const rf = gearFilteredRf('零式水中聴音機');
+    attacker.aswBonus += rf >= 5 ? 1 : 0;
+    attacker.aswBonus += rf >= 8 ? 1 : 0;
+    attacker.aswBonus += rf >= 10 ? 1 : 0;
+  }
+
   // 149  https://wikiwiki.jp/kancolle/四式水中聴音機
   if (gearCount('四式水中聴音機')) {
     if (attacker.name == '夕張改二丁') {
@@ -312,10 +322,10 @@ function getAswBonus(attacker) {
   }
 
   // 227  https://wikiwiki.jp/kancolle/二式爆雷
-  if (num = gearCount('二式爆雷')) {
-    const rf = gearFilteredRf('二式爆雷');
-    attacker.aswBonus += rf.reduce((v1, v2) => v1 + (v2 >= 8 ? 1 : 0), 0);
-    attacker.aswBonus += rf.reduce((v1, v2) => v1 + (v2 >= 10 ? 1 : 0), 0);
+  if (gearCount('二式爆雷')) {
+    const rfMax = gearFilteredRf('二式爆雷').reduce((v1, v2) => Math.max(v1, v2), -Infinity);
+    attacker.aswBonus += rfMax >= 8 ? 1 : 0;
+    attacker.aswBonus += rfMax >= 10 ? 1 : 0;
   }
 
   // 228  https://wikiwiki.jp/kancolle/九六式艦戦改
@@ -714,7 +724,6 @@ function getAswBonus(attacker) {
       attacker.aswBonus += 1 * num;
     }
   }
-
 
   // single
 
