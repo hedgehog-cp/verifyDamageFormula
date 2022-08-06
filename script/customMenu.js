@@ -10,7 +10,8 @@
  function onOpen(event) {
   let menuItems = [
     { name: '目次作成', functionName: 'createIndex' },
-    { name: '行サイズを調整する', functionName : 'adjustRowSize'}
+    { name: '行サイズを調整する', functionName : 'adjustRowSize'},
+    { name: '二分法による下限第3種加算補正値探索', functionName : 'b3BinarySearch'}
   ];
   let sheet = SpreadsheetApp.getActiveSpreadsheet();
   sheet.addMenu('スクリプト', menuItems);
@@ -107,5 +108,49 @@ function adjustRowSize() {
       // diffRowSize == 0の場合は何もしなくてよい
 
     }
+  }
+}
+
+/**
+ * @brief 二分法により、第3種加算補正値の下限を探索します。
+ * @see addMenu::createIndex()
+ * @OnlyCurrentDoc 
+ */
+function b3BinarySearch() {
+  let spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  let console = spreadsheet.getSheetByName('console');
+
+  //function　getB3() { return Number(console.getRange('P3').getValue()); }
+  function getB3_inf() { return Number(console.getRange('P28').getValue()); }
+  function getB3_max() { return Number(console.getRange('R28').getValue()); }
+  function isUnexpectedDamage() { return Number(console.getRange('P40').getValue()) + Number(console.getRange('R40').getValue());}
+
+  function setB3(num) { Number(console.getRange('P3').setValue(num)); }
+  //function　setB3_inf(num) { Number(console.getRange('P3').setValue(num)); }
+  //function　setB3_max(num) { Number(console.getRange('P3').setValue(num)); }
+
+  let b3_inf = getB3_inf();
+  let b3_max = getB3_max();
+  let mid = (b3_inf + b3_max) / 2;
+  const accuracy = 1e-10;
+
+  while (1) {
+    let temp_acc = mid;
+    let temp_is;
+
+    setB3(mid);
+
+    if (temp_is = isUnexpectedDamage()) {
+      b3_inf = mid;
+      mid = (mid + b3_max) / 2;
+    } else {
+      b3_max = mid;
+      mid = (b3_inf + mid) / 2;
+    }
+
+    Logger.log(mid + ', ' + temp_is)
+
+    if (Math.abs(temp_acc - mid) < accuracy && temp_is) break;
+    
   }
 }
