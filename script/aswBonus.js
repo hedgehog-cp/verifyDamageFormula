@@ -42,6 +42,8 @@ class AswAttacker {
     this.isEquipAutogyro = this.gearId.some(id => AswAttacker.isAutogyro(id));
     /** @type {boolean} 回転翼機を装備しているか */
     this.isEquipHelicopter = this.gearId.some(id => AswAttacker.isHelicopter(id));
+    /** @type {boolean} 二式爆雷を装備しているか */
+    this.isEquipType2DepthCharge = this.gearId.some(id => AswAttacker.isType2DepthCharge(id));
 
     /** @type 対潜装備ボーナス */
     this.aswBonus = 0;
@@ -201,6 +203,16 @@ class AswAttacker {
     const helicopter = GEAR_PICTURE_BOOK_ID_MAP['回転翼機'];
     return AswAttacker.getGearPictureBook(id) == helicopter;
   }
+
+  /**
+   * @method isAutogyro 与えた装備IDが二式爆雷であるか検証する
+   * @param {number} id 装備ID
+   * @return {boolean} 二式爆雷であればtrue、そうでなければfalseを返す
+   */
+  static isType2DepthCharge(id) {
+    const type2DepthCharge = GEAR_ID_MAP['二式爆雷'];
+    return id == type2DepthCharge;
+  }
 }
 
 /**
@@ -297,6 +309,13 @@ function getAswBonus(attacker) {
     } else if (attacker.ctype == '秋月型' || ['雪風改二', '五十鈴改二', '由良改二', '那珂改二', '夕張改二', '夕張改二特'].includes(attacker.name)) {
       attacker.aswBonus += 1;
     }
+  }
+
+  // 227  https://wikiwiki.jp/kancolle/二式爆雷
+  if (num = gearCount('二式爆雷')) {
+    const rf = gearFilteredRf('二式爆雷');
+    attacker.aswBonus += rf.reduce((v1, v2) => v1 + (v2 >= 8 ? 1 : 0), 0);
+    attacker.aswBonus += rf.reduce((v1, v2) => v1 + (v2 >= 10 ? 1 : 0), 0);
   }
 
   // 228  https://wikiwiki.jp/kancolle/九六式艦戦改
