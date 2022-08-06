@@ -705,6 +705,16 @@ function getAswBonus(attacker) {
     }
   }
 
+  // 472 https://wikiwiki.jp/kancolle/Mk.32%20対潜魚雷(Mk.2落射機)
+  if (num = gearCount('Mk.32 対潜魚雷(Mk.2落射機)')) {
+    if (attacker.country == 'アメリカ') {
+      attacker.aswBonus += 2 * num;
+    }
+    if (attacker.country == 'イギリス' || attacker.name == 'Samuel B.Roberts Mk.II') {
+      attacker.aswBonus += 1 * num;
+    }
+  }
+
 
   // single
 
