@@ -35,14 +35,14 @@ class AswAttacker {
     /** @type {boolean} 水上爆撃機を装備しているか */
     this.isEquipSeaplaneBomber = this.gearId.some(id => AswAttacker.isSeaplaneBomber(id));
     /** @type {boolean} 国産爆雷投射機を装備しているか [未使用] */
-    // this.isEquipJapanDepthChargeProjector = this.gearId.some(id => AswAttacker.isJapaneseDepthChargeProjector(id));
+    //this.isEquipJapanDepthChargeProjector = this.gearId.some(id => AswAttacker.isJapaneseDepthChargeProjector(id));
     /** @type {boolean} 国産ソナーを装備しているか */
     this.isEquipJapanSonar = this.gearId.some(id => AswAttacker.isJapaneseSonar(id));
     /** @type {boolean} オートジャイロを装備しているか */
     this.isEquipAutogyro = this.gearId.some(id => AswAttacker.isAutogyro(id));
     /** @type {boolean} 回転翼機を装備しているか */
     this.isEquipHelicopter = this.gearId.some(id => AswAttacker.isHelicopter(id));
-    /** @type {boolean} 二式爆雷を装備しているか */
+    /** @type {boolean} 二式爆雷を装備しているか [未使用] */
     //this.isEquipType2DepthCharge = this.gearId.some(id => AswAttacker.isType2DepthCharge(id));
 
     /** @type 対潜装備ボーナス */
@@ -117,6 +117,7 @@ class AswAttacker {
     const sakuValue = 5;
     const gearSakuValue = AswAttacker.getGearSakuValue(id);
     const isSurface = gearSakuValue >= sakuValue;
+    if (!isSurface) return false;
 
     // 電探 ?
     const radar = [
@@ -127,7 +128,7 @@ class AswAttacker {
     const gearCategory = AswAttacker.getGearCategory(id);
     const isRadar = radar.includes(gearCategory);
 
-    return isSurface && isRadar;
+    return /*isSurface &&*/ isRadar;
   };
 
   /**
@@ -221,6 +222,7 @@ class AswAttacker {
  * @function getAswBonus 引数に与えられた攻撃艦1隻の対潜装備ボーナスを取得する
  * @param {AswAttacker} attacker 攻撃艦1隻
  * @return {number} 対潜装備ボーナス
+ * @see https://github.com/KC3Kai/KC3Kai/blob/master/src/library/objects/GearBonus.js
  */
 function getAswBonus(attacker) {
 
@@ -251,7 +253,7 @@ function getAswBonus(attacker) {
   let num;
 
 
-  // common
+  // multiple
 
   // 19   https://wikiwiki.jp/kancolle/九六式艦戦
   if (num = gearCount('九六式艦戦')) {
@@ -259,6 +261,21 @@ function getAswBonus(attacker) {
       attacker.aswBonus += 3 * num;
     } else if (attacker.ctype == '鳳翔型') {
       attacker.aswBonus += 2 * num;
+    }
+  }
+
+  // 44   https://wikiwiki.jp/kancolle/九四式爆雷投射機
+  // 45   https://wikiwiki.jp/kancolle/三式爆雷投射機	
+  if (num = gearCount('九四式爆雷投射機') + gearCount('三式爆雷投射機	')) {
+    if (attacker.ctype == '香取型') {
+      attacker.aswBonus += 3 * num;
+    }
+  }
+
+  
+  if (num = gearCount('九四式爆雷投射機')) {
+    if (attacker.ctype == '香取型') {
+      attacker.aswBonus += 3 * num;
     }
   }
 
@@ -348,7 +365,7 @@ function getAswBonus(attacker) {
 
   // 287  https://wikiwiki.jp/kancolle/三式爆雷投射機%20集中配備
   if (num = gearCount('三式爆雷投射機 集中配備')) {
-    if (attacker.ctype == '香取型' || attacker.name == '能代改二') {
+    if (attacker.name == '能代改二' || attacker.ctype == '香取型') {
       attacker.aswBonus += 3 * num;
     } else if (['雪風改二', '五十鈴改二', '由良改二', '那珂改二', '夕張改二丁'].includes(attacker.name)) {
       attacker.aswBonus += 2 * num;
@@ -359,7 +376,7 @@ function getAswBonus(attacker) {
   if (num = gearCount('試製15cm9連装対潜噴進砲')) {
     if (attacker.name == '能代改二') {
       attacker.aswBonus += 4 * num;
-    } else if (attacker.stype == '香取型' || attacker.name == '夕張改二丁') {
+    } else if (attacker.name == '夕張改二丁' || attacker.ctype == '香取型') {
       attacker.aswBonus = 3 * num;
     } else if (['雪風改二', '五十鈴改二', '由良改二', '那珂改二'].includes(attacker.name)) {
       attacker.aswBonus += 2 * num;
@@ -569,7 +586,7 @@ function getAswBonus(attacker) {
       attacker.aswBonus += 3;
     } else if (attacker.country == 'イギリス' && ['駆逐艦', '軽巡洋艦'].includes(attacker.stype)) {
       attacker.aswBonus += 2;
-    } else if (['パース', '丹陽', '雪風改二'].includes(attacker.name)) {
+    } else if (attacker.yomi == 'パース' || ['丹陽', '雪風改二'].includes(attacker.name)) {
       attacker.aswBonus += 1;
     }
   }
@@ -607,7 +624,7 @@ function getAswBonus(attacker) {
   if (num = gearCount('TBM-3W+3S')) {
     if (attacker.name == '加賀改二護') {
       attacker.aswBonus += 4 * num;
-    } else if (attacker.country == 'アメリカ' && ['軽空母', '正規空母', '装甲空母'].includes(attacker.stype)) {
+    } else if (['Lexington級', 'Casablanca級', 'Essex級', 'Yorktown級'].includes(attacker.ctype)) {
       attacker.aswBonus += 3 * num;
     }
   }
@@ -629,7 +646,7 @@ function getAswBonus(attacker) {
 
   // 415  https://wikiwiki.jp/kancolle/SO3C%20Seamew改
   if (num = gearCount('SO3C Seamew改')) {
-    if (attacker.country == 'アメリカ' && ['軽巡洋艦', '重巡洋艦', '戦艦', '巡洋戦艦']) {
+    if (attacker.country == 'アメリカ' && ['軽巡洋艦', '重巡洋艦', '戦艦', '巡洋戦艦'].includes(attacker.stype)) {
       attacker.aswBonus += num;
     }
   }
@@ -701,10 +718,15 @@ function getAswBonus(attacker) {
 
   // 451 https://wikiwiki.jp/kancolle/三式指揮連絡機改
   if (num = gearCount('三式指揮連絡機改')) {
+    const rf = gearFilteredRf('三式指揮連絡機改');
     if (attacker.yomi == 'やましおまる') {
       attacker.aswBonus += 3 * num;
+      attacker.aswBonus += rf.reduce((v1, v2) => v1 + (v2 >= 3 ? 1 : 0), 0);
+      attacker.aswBonus += rf.reduce((v1, v2) => v1 + (v2 >= 8 ? 1 : 0), 0);
     } else if (attacker.yomi == 'あきつまる') {
       attacker.aswBonus += 2 * num;
+      attacker.aswBonus += rf.reduce((v1, v2) => v1 + (v2 >= 3 ? 1 : 0), 0);
+      attacker.aswBonus += rf.reduce((v1, v2) => v1 + (v2 >= 7 ? 1 : 0), 0);
     }
   }
 
@@ -777,7 +799,7 @@ function getAswBonus(attacker) {
   // ヘリコプター && つよつよTBM && 加賀改二護 
   if (attacker.isEquipHelicopter * gearCount('TBM-3W+3S')) {
     if (attacker.name == '加賀改二護') {
-      attacker.aswBonus += 10;
+      attacker.aswBonus += 4;
     }
   }
 }
@@ -804,5 +826,5 @@ function aswBonus(attackerId, gearId, gearRf) {
   }
 
   // 対潜装備ボーナスを返す
-  return attacker.map(e => e.aswBonus)
+  return attacker.map(e => e.aswBonus);
 }

@@ -65,6 +65,7 @@ class TpAttacker {
  * @function getTpBonus 引数に与えられた攻撃艦1隻の砲撃戦.航空攻撃 雷装装備ボーナスを取得する
  * @param {TpAttacker} attacker 攻撃艦1隻
  * @returns {Array<number>} 砲撃戦.航空攻撃 雷装装備ボーナス[]
+ * @see https://github.com/KC3Kai/KC3Kai/blob/master/src/library/objects/GearBonus.js
  */
 function getTpBonus(attacker) {
 
@@ -89,34 +90,28 @@ function getTpBonus(attacker) {
 
     // 372	https://wikiwiki.jp/kancolle/天山一二型甲
     if (attacker.gearId[i] == GEAR_ID_MAP['天山一二型甲']) {
-      if (['龍鳳改二', '龍鳳改二戊'].includes(attacker.name)) {
-        attacker.tpBonusPerSlot[i] = 2;
+      if (attacker.ctype == '祥鳳型' && /改二/.test(attacker.name)) {
+        attacker.tpBonusPerSlot[i] = 1;
         continue;
       } else if (['翔鶴型', '大鳳型'].includes(attacker.ctype)) {
         attacker.tpBonusPerSlot[i] = 1;
+        continue;
+      } else if (/龍鳳改/.test(attacker.name)) {
+        attacker.tpBonusPerSlot[i] = 1;
+        attacker.tpBonusPerSlot[i] += /改二/.test(attacker.name) ? 1 : 0;
         continue;
       }
     }
 
     // 373	https://wikiwiki.jp/kancolle/天山一二型甲改(空六号電探改装備機)
     if (attacker.gearId[i] == GEAR_ID_MAP['天山一二型甲改(空六号電探改装備機)']) {
-      if (attacker.name == '龍鳳改二戊') {
-        attacker.tpBonusPerSlot[i] = 3;
-        continue;
-      } else if (attacker.name == '龍鳳改二') {
-        attacker.tpBonusPerSlot[i] = 2;
-        continue;
-      } else if (['翔鶴型', '大鳳型'].includes(attacker.ctype)) {
-        attacker.tpBonusPerSlot[i] = 2;
-        continue;
-      } else if (attacker.ctype == '最上型' && /航改二/.test(attacker.name)) {
-        attacker.tpBonusPerSlot[i] = 2;
-        continue;
-      } else if (['龍鳳', '龍鳳改'].includes(attacker.name)) {
+      if (attacker.ctype == '祥鳳型' && /改/.test(attacker.name)) {
         attacker.tpBonusPerSlot[i] = 1;
         continue;
-      } else if (attacker.ctype == '祥鳳型' && /改/.test(attacker.name)) {
+      } else if (attacker.ctype == '龍鳳型') {
         attacker.tpBonusPerSlot[i] = 1;
+        attacker.tpBonusPerSlot[i] += attacker.name == '龍鳳改二' ? 1 : 0;
+        attacker.tpBonusPerSlot[i] += attacker.name == '龍鳳改二戊' ? 2 : 0;
         continue;
       } else if (attacker.ctype == '千歳型' && /航改/.test(attacker.name)) {
         attacker.tpBonusPerSlot[i] = 1;
@@ -124,31 +119,36 @@ function getTpBonus(attacker) {
       } else if (attacker.ctype == '飛鷹型') {
         attacker.tpBonusPerSlot[i] = 1;
         continue;
+      } else if (['翔鶴型', '大鳳型'].includes(attacker.ctype)) {
+        attacker.tpBonusPerSlot[i] = 2;
+        continue;
+      } else if (['鈴谷航改二', '熊野航改二'].includes(attacker.name)) {
+        attacker.tpBonusPerSlot[i] = 2;
+        continue;
       }
     }
 
     // 374	https://wikiwiki.jp/kancolle/天山一二型甲改(熟練／空六号電探改装備機)
     if (attacker.gearId[i] == GEAR_ID_MAP['天山一二型甲改(熟練/空六号電探改装備機)']) {
-      if (attacker.ctype == '翔鶴型' && /改二/.test(attacker.name)) {
-        attacker.tpBonusPerSlot[i] = 3;
+      if (attacker.ctype == '祥鳳型' && /改/.test(attacker.name)) {
+        attacker.tpBonusPerSlot[i] = 1;
         continue;
-      } else if (['大鳳改', '龍鳳改二戊'].includes(attacker.name)) {
-        attacker.tpBonusPerSlot[i] = 3;
+      } else if (attacker.ctype == '龍鳳型') {
+        attacker.tpBonusPerSlot[i] = 1;
+        attacker.tpBonusPerSlot[i] += attacker.name == '龍鳳改二' ? 1 : 0;
+        attacker.tpBonusPerSlot[i] += attacker.name == '龍鳳改二戊' ? 2 : 0;
         continue;
-      } else if (attacker.ctype == '最上型' && /航改二/.test(attacker.name)) {
+      } else if (attacker.ctype == '千歳型') {
+        attacker.tpBonusPerSlot[i] = 1;
+        continue;
+      } else if (attacker.ctype == '飛鷹型') {
         attacker.tpBonusPerSlot[i] = 2;
         continue;
-      } else if (['龍鳳改二', '飛鷹改', '隼鷹改二'].includes(attacker.name)) {
+      } else if (['翔鶴型', '大鳳型'].includes(attacker.ctype)) {
+        attacker.tpBonusPerSlot[i] = 3;
+        continue;
+      } else if (['鈴谷航改二', '熊野航改二'].includes(attacker.name)) {
         attacker.tpBonusPerSlot[i] = 2;
-        continue;
-      } else if (attacker.name == '龍鳳改') {
-        attacker.tpBonusPerSlot[i] = 1;
-        continue;
-      } else if (attacker.ctype == '祥鳳型' && /改/.test(attacker.name)) {
-        attacker.tpBonusPerSlot[i] = 1;
-        continue;
-      } else if (attacker.ctype == '千歳型' && /航改二/.test(attacker.name)) {
-        attacker.tpBonusPerSlot[i] = 1;
         continue;
       }
     }
@@ -165,7 +165,7 @@ function getTpBonus(attacker) {
     if (attacker.gearId[i] == GEAR_ID_MAP['Barracuda Mk.III']) {
       if (attacker.country == 'イギリス' && ['軽空母', '正規空母', '装甲空母'].includes(attacker.stype)) {
         attacker.tpBonusPerSlot[i] = 1;
-        attacker.tpBonusPerSlot[i] = attacker.gearRf[i] >= 8 ? 1 : 0;
+        attacker.tpBonusPerSlot[i] += attacker.gearRf[i] >= 8 ? 1 : 0;
       }
     }
 

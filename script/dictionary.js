@@ -89,6 +89,7 @@ const SHIP_TYPE = [
 
 // 艦型
 // 手動で更新する必要がある
+// https://docs.google.com/spreadsheets/d/1IQRy3OyMToqqkopCkQY9zoWW-Snf7OjdrALqwciyyRA/edit#gid=832802435
 const CLASS_TYPE = [
   { ctype: 1, name: "綾波型", country: "日本" },
   { ctype: 2, name: "伊勢型", country: "日本" },
@@ -204,5 +205,8 @@ const CLASS_TYPE = [
   { ctype: 112, name: "Illustrious級", country: "イギリス" },
   { ctype: 113, name: "Conte di Cavour級", country: "イタリア" },
   { ctype: 114, name: "Gato級", country: "アメリカ" },
-  { ctype: 115, name: "特2TL型", country: "日本" }
+  { ctype: 115, name: "特2TL型", country: "日本" },
+  { ctype: 116, name: "Independence級", country: "アメリカ"},
+  { ctype: 117, name: "鵜来型", country: "日本"},
+  { ctype: 118, name: "Ranger級", country: "アメリカ"}
 ];
