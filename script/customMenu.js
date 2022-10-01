@@ -121,9 +121,9 @@ function b3BinarySearch() {
   let console = spreadsheet.getSheetByName('console');
 
   //function　getB3() { return Number(console.getRange('P3').getValue()); }
-  function getB3_inf() { return Number(console.getRange('P28').getValue()); }
-  function getB3_max() { return Number(console.getRange('R28').getValue()); }
-  function isUnexpectedDamage() { return Number(console.getRange('P40').getValue()) + Number(console.getRange('R40').getValue());}
+  function getB3_inf() { return Number(console.getRange('P25').getValue()); }
+  function getB3_max() { return Number(console.getRange('R25').getValue()); }
+  function isUnexpectedDamage() { return Number(console.getRange('P36').getValue()) + Number(console.getRange('R36').getValue());}
 
   function setB3(num) { Number(console.getRange('P3').setValue(num)); }
   //function　setB3_inf(num) { Number(console.getRange('P3').setValue(num)); }
