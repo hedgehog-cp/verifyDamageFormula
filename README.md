@@ -1,16 +1,23 @@
 # verifyDamageFormula
 
-ダメージ検証用スクリプト  
-[ダメージ検証用スプレ改最新版](https://drive.google.com/drive/folders/1J_tBagjdXl81d0onHqKf--H5hf0TGHnw?usp=sharing)で利用します。
+これはダメージ検証用スクリプトです。
 
-## logbook
+艦隊これくしょん -艦これ- のダメージ式を検証するための
+[ダメージ検証用スプレ改最新版](https://drive.google.com/drive/folders/1J_tBagjdXl81d0onHqKf--H5hf0TGHnw?usp=sharing)
+で利用します。
 
-赤仮でデータ出力するために使うフィルタがあります。
+## logbook/filter
+
+ダメージ検証用スプレ改に入力する赤仮データを, 赤仮から上手に出力するために使うフィルタがあります。
 
 ## src
 
-ダメージ検証用スプレ改最新版で利用する Apps script があります。
-GAS ではなくて, TypeScript で書いています。
+ダメージ検証用スプレ改で利用する Google Apps script(GAS) のスクリプトがあります。
+
+実態は GAS ではなくて, TypeScript で書いています。
+TypeScript なので, 予め Node.js とか npm とか入れておく必要があると思います。
+
+うまいこと clasp を install して, `clasp push` すると, 紐づけしたスプレッドシートのスクリプトに直接アップロードされます。
 以下を参考にしてください。
 
 - [google-clasp](https://github.com/google/clasp)

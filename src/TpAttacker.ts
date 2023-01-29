@@ -10,8 +10,11 @@ class TpAttacker {
   readonly stype: stype;
   readonly ctype: ctype;
   readonly nationality: nationality;
-  readonly gears: Map<number, number[]>;
+  //readonly gears: Map<number, number[]>;
+  readonly gearIds: number[];
+  readonly gearRfs: number[];
   bonus: number;
+  bonuses: number[];
   is_error: boolean;
 
   constructor(attackerId: number, gearIds: number[], gearRfs: number[]) {
@@ -39,25 +42,28 @@ class TpAttacker {
         ? "undefined"
         : MST_NATIONALITY[this.mst.api_ctype];
 
-    this.gears = new Map();
-    gearIds.forEach((val, index) => {
-      if (!this.gears.has(val)) {
-        this.gears.set(val, []);
-      }
-      this.gears.get(val)?.push(gearRfs[index]);
-    });
+    //this.gears = new Map();
+    //gearIds.forEach((val, index) => {
+    //  if (!this.gears.has(val)) {
+    //    this.gears.set(val, []);
+    //  }
+    //  this.gears.get(val)?.push(gearRfs[index]);
+    //});
+    this.gearIds = gearIds;
+    this.gearRfs = gearRfs;
 
-    this.bonus = 0;
+    this.bonus = Infinity;
+    this.bonuses = [Infinity, Infinity, Infinity, Infinity, Infinity, Infinity];
     this.is_error = this.mst === undefined;
   }
 
-  gearCount(gearName: string): number {
-    const id: number = GEAR_NAME_ID_MAP[gearName];
-    return this.gears.get(id)?.length ?? 0;
-  }
-
-  gearRfs(gearName: string): number[] {
-    const id: number = GEAR_NAME_ID_MAP[gearName];
-    return this.gears.get(id) ?? [];
-  }
+  //gearCount(gearName: string): number {
+  //  const id: number = GEAR_NAME_ID_MAP[gearName];
+  //  return this.gears.get(id)?.length ?? 0;
+  //}
+  //
+  //gearRfs(gearName: string): number[] {
+  //  const id: number = GEAR_NAME_ID_MAP[gearName];
+  //  return this.gears.get(id) ?? [];
+  //}
 }
