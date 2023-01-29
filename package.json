@@ -1,0 +1,23 @@
+{
+    "name": "verifydamageformula",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "ダメージ検証用スクリプト",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hedgehog-cp/verifyDamageFormula.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/hedgehog-cp/verifyDamageFormula/issues"
+    },
+    "homepage": "https://github.com/hedgehog-cp/verifyDamageFormula#readme",
+    "devDependencies": {
+        "@types/google-apps-script": "^1.0.57"
+    }
+}

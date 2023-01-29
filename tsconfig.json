@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "lib": ["esnext", "dom.iterable"],
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+
+    "newLine": "lf",
+    "noImplicitReturns": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
