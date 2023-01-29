@@ -51,30 +51,6 @@ class TpAttacker {
     this.is_error = this.mst === undefined;
   }
 
-  isEquipSurfaceRadar(): boolean {
-    return [...this.gears.keys()].some(isSurfaceRadar);
-  }
-
-  isEquipReconSeaplane(): boolean {
-    return [...this.gears.keys()].some(isReconSeaplane);
-  }
-
-  isEquipSeaplaneBomber(): boolean {
-    return [...this.gears.keys()].some(isSeaplaneBomber);
-  }
-
-  isEquipJapanSonar(): boolean {
-    return [...this.gears.keys()].some(isJapaneseSonar);
-  }
-
-  isEquipAutogyro(): boolean {
-    return [...this.gears.keys()].some(isAutogyro);
-  }
-
-  isEquipHelicopter(): boolean {
-    return [...this.gears.keys()].some(isHelicopter);
-  }
-
   gearCount(gearName: string): number {
     const id: number = GEAR_NAME_ID_MAP[gearName];
     return this.gears.get(id)?.length ?? 0;
