@@ -65,7 +65,7 @@ function createIndex() {
  */
 function adjustRowSize() {
   // 調整したいシートの名前
-  const adjustTargetSheets = ["input", "calc", "invCalc", "report"];
+  const adjustTargetSheets = ["input", "calc", "invCalc", "attacker"];
 
   const MIN = 3;
   const MAX = 10000;
