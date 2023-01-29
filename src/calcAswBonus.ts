@@ -14,7 +14,7 @@ function aswBonus(
   const ROW_SIZE = attackerIds.reduce((v1, v2) => v1 + (v2 > 0 ? 1 : 0), 0);
 
   // 攻撃艦
-  let attackers = new Array(ROW_SIZE);
+  let attackers: AswAttacker[] = new Array(ROW_SIZE);
 
   // 行サイズぶんだけ対潜装備ボーナスを取得
   for (let i = 0; i < ROW_SIZE; i++) {
@@ -29,6 +29,7 @@ function aswBonus(
 /**
  * @function calcAswBonus 引数に与えられた攻撃艦1隻の対潜装備ボーナスを計算する
  * @param attacker 攻撃艦1隻(艦娘を想定)
+ * @return [[noreturn]]
  * @see https://github.com/KC3Kai/KC3Kai/blob/master/src/library/objects/GearBonus.js
  * @see https://docs.google.com/spreadsheets/d/1bInH11S_xKdaKP754bB7SYh-di9gGzcXkiQPvGuzCpg/edit#gid=843064990
  */
@@ -121,7 +122,7 @@ function calcAswBonus(attacker: AswAttacker) {
 
   // 129  https://wikiwiki.jp/kancolle/熟練見張員
   if ((num = attacker.gearCount("熟練見張員"))) {
-    if (attacker.nationality == "日本" && attacker.stype == "駆逐艦") {
+    if (attacker.nationality === "日本" && attacker.stype === "駆逐艦") {
       attacker.bonus += 2 * num;
     }
   }
@@ -155,7 +156,7 @@ function calcAswBonus(attacker: AswAttacker) {
   if ((num = attacker.gearCount("三式爆雷投射機 集中配備"))) {
     if (attacker.ctype === "香取型") {
       attacker.bonus += 3 * num;
-    } else if (attacker.name == "能代改二") {
+    } else if (attacker.name === "能代改二") {
       attacker.bonus += 3 * num;
     } else if (
       ["夕張改二丁", "五十鈴改二", "那珂改二", "由良改二", "雪風改二"].includes(
@@ -176,7 +177,7 @@ function calcAswBonus(attacker: AswAttacker) {
       attacker.bonus += 2 * num;
     } else if (attacker.name === "夕張改二丁") {
       attacker.bonus = 3 * num;
-    } else if (attacker.name == "能代改二") {
+    } else if (attacker.name === "能代改二") {
       attacker.bonus += 4 * num;
     }
   }
@@ -451,7 +452,7 @@ function calcAswBonus(attacker: AswAttacker) {
   if (
     (num = attacker.gearCount("装甲艇(AB艇)") + attacker.gearCount("武装大発"))
   ) {
-    if (attacker.yomi == "あきつまる") {
+    if (attacker.yomi === "あきつまる") {
       attacker.bonus += num;
     }
   }
@@ -585,7 +586,7 @@ function calcAswBonus(attacker: AswAttacker) {
         "矢矧改二",
         "矢矧改二乙",
         "時雨",
-      ]
+      ].includes(attacker.name)
     ) {
       attacker.bonus += num;
       attacker.bonus += rfs.reduce((v1, v2) => v1 + (v2 >= 5 ? 1 : 0), 0);
@@ -604,21 +605,21 @@ function calcAswBonus(attacker: AswAttacker) {
 
   // 水上偵察機
   if (attacker.isEquipReconSeaplane()) {
-    if (attacker.ctype == "阿賀野型" && attacker.isKai2) {
+    if (attacker.ctype === "阿賀野型" && attacker.isKai2) {
       attacker.bonus += 3;
     }
   }
 
   // 水上爆撃機
   if (attacker.isEquipSeaplaneBomber()) {
-    if (attacker.ctype == "阿賀野型" && attacker.isKai2) {
+    if (attacker.ctype === "阿賀野型" && attacker.isKai2) {
       attacker.bonus += 1;
     }
   }
 
   // 回転翼機
   if (attacker.isEquipAutogyro() || attacker.isEquipHelicopter()) {
-    if (attacker.name == "能代改二") {
+    if (attacker.name === "能代改二") {
       attacker.bonus += 4;
     } else if (["矢矧改二", "矢矧改二乙"].includes(attacker.name)) {
       attacker.bonus += 3;
@@ -660,9 +661,9 @@ function calcAswBonus(attacker: AswAttacker) {
       ].includes(attacker.name)
     ) {
       attacker.bonus += 1;
-    } else if (attacker.name == "夕張改二丁") {
+    } else if (attacker.name === "夕張改二丁") {
       attacker.bonus += 3;
-    } else if (attacker.name == "能代改二") {
+    } else if (attacker.name === "能代改二") {
       attacker.bonus += 2;
     }
   }
@@ -675,7 +676,7 @@ function calcAswBonus(attacker: AswAttacker) {
   }
 
   // 347 https://wikiwiki.jp/kancolle/二式12cm迫撃砲改%20集中配備
-  if (attacker.gearCount("二式12cm迫撃砲改")) {
+  if (attacker.gearCount("二式12cm迫撃砲改 集中配備")) {
     if (attacker.yomi === "やましおまる") {
       attacker.bonus += 2;
     }
@@ -695,7 +696,7 @@ function calcAswBonus(attacker: AswAttacker) {
 
   // 412  https://wikiwiki.jp/kancolle/水雷戦隊%20熟練見張員
   if (attacker.gearCount("水雷戦隊 熟練見張員")) {
-    if (attacker.nationality == "日本" && attacker.stype == "駆逐艦") {
+    if (attacker.nationality === "日本" && attacker.stype === "駆逐艦") {
       attacker.bonus += 2;
     }
   }
@@ -711,7 +712,7 @@ function calcAswBonus(attacker: AswAttacker) {
   if (attacker.gearCount("三式水中探信儀改")) {
     if (["那珂改二", "由良改二", "五十鈴改二"].includes(attacker.name)) {
       attacker.bonus += 1;
-    } else if (attacker.nationality == "日本" && attacker.stype == "駆逐艦") {
+    } else if (attacker.nationality === "日本" && attacker.stype === "駆逐艦") {
       attacker.bonus += 1;
     }
     if (
@@ -819,5 +820,5 @@ function calcAswBonus(attacker: AswAttacker) {
     }
   }
 
-  //attacker.msg = "" + num;
+  // [[noreturn]]
 }
