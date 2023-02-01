@@ -546,7 +546,7 @@ function calcAswBonus(attacker: AswAttacker) {
       attacker.bonus += 2 * num;
       attacker.bonus += attacker.name === "Samuel B.Roberts Mk.II" ? 1 : 0;
     } else if (attacker.nationality === "イギリス") {
-      attacker.bonus += 1 * num;
+      attacker.bonus += num;
     }
   }
 
@@ -592,6 +592,18 @@ function calcAswBonus(attacker: AswAttacker) {
       attacker.bonus += rfs.reduce((v1, v2) => v1 + (v2 >= 5 ? 1 : 0), 0);
       attacker.bonus += rfs.reduce((v1, v2) => v1 + (v2 >= 10 ? 1 : 0), 0);
     }
+  }
+
+  //  489 https://wikiwiki.jp/kancolle/一式戦%20隼II型改(20戦隊)
+  if ((num = attacker.gearCount("一式戦 隼II型改(20戦隊)"))) {
+    if (attacker.yomi === "やましおまる") {
+      attacker.bonus += num;
+      attacker.bonus += attacker.isKai ? num : 0;
+    } else if (attacker.yomi === "あきつまる") {
+      attacker.bonus += num;
+    }
+    const rfs: number[] = attacker.gearRfs("一式戦 隼II型改(20戦隊)");
+    attacker.bonus += rfs.reduce((v1, v2) => v1 + (v2 >= 6 ? 1 : 0), 0);
   }
 
   //-------------------------------------------------------------------------//
