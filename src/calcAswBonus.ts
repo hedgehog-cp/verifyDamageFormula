@@ -661,7 +661,7 @@ function calcAswBonus(attacker: AswAttacker) {
   // 149  https://wikiwiki.jp/kancolle/四式水中聴音機
   if (attacker.gearCount("四式水中聴音機")) {
     if (attacker.ctype === "秋月型") {
-      attacker.bonus += 2;
+      attacker.bonus += 1;
     } else if (
       [
         "雪風改二",
