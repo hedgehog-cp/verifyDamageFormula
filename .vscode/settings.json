@@ -1,7 +1,67 @@
 {
+  //-------------------------------------------------------------------------//
+  //                             for TypeScript                              //
+  //-------------------------------------------------------------------------//
+
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
+
+  //-------------------------------------------------------------------------//
+  //                                 for LaTeX                               //
+  //-------------------------------------------------------------------------//
+
+  // .texファイルを保存するたびに自動でBuild
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  // おまじない
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk",
+      "tools": ["latexmk"]
+    }
+  ],
+  // おまじない
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-pdfdvi",
+        "%DOC%"
+      ]
+    }
+  ],
+  // Build時に自動で指定したファイルを削除する
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  // Build時に自動で削除するファイルを指定する (無論, PDFファイルは残す)
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.ist",
+    "*.fls",
+    "*.log",
+    "*.fdb_latexmk",
+    "*.dvi",
+    "*.synctex.gz"
+  ],
+  //行末の空白スペースを削除する
+  "files.trimTrailingWhitespace": true
 }

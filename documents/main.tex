@@ -1,0 +1,59 @@
+\documentclass[10pt, a4paper]{jsarticle}
+\usepackage{amsmath, amssymb, mathtools, amsthm, bm}
+%\usepackage[top=25truemm,bottom=25truemm,left=25truemm,right=25truemm]{geometry}
+
+%---- begin -----------------------  ページアンカー  --------------------------------%
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+\hypersetup{
+    setpagesize=false,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black
+}
+%----------------------------------  ページアンカー  ---------------------- end -----%
+
+
+%---- begin --------------------------  タイトル  -----------------------------------%
+
+\title{
+    艦隊これくしょん -艦これ- \\ \vspace{3mm}
+    \Huge 艦これダメージ式及び逆算式定義改vx.x.x
+}
+\vspace{3mm}
+\author{
+    \Large{hedgehog}
+    \thanks{{\url{https://twitter.com/hedgehog_hasira}}}
+}
+\date{\today}
+
+
+%-------------------------------------  タイトル  ------------------------- end -----%
+
+\begin{document}
+\maketitle
+\begin{abstract}
+あれとかこれとかいろいろあったよねぇ～。
+でもこれからはこんな感じでこうしていきたいと思うの。
+だからいろいろ書いていくよ。
+\end{abstract}
+
+%----  文章構造
+%\part{title}	部
+%%\chapter{title}	章（jarticle・tarticleクラスには用意されていない）
+%\section{title}	節
+%\subsection{title}	項（小節）
+%\subsubsection{title}	目（小々節）
+%\paragraph{title}	段落
+%\subparagraph{title}	小段落
+
+\section{ダメージ式}
+
+\[
+    ダメージ = \big\lfloor (最終攻撃力 - 最終防御力) \times 弾薬量補正 \big\rfloor
+\]
+
+\end{document}
