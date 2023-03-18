@@ -256,6 +256,11 @@
     api_show_flg: 0,
   },
   {
+    api_id: 52,
+    api_name: "陸戦部隊",
+    api_show_flg: 0,
+  },
+  {
     api_id: 53,
     api_name: "大型陸上機",
     api_show_flg: 0,
