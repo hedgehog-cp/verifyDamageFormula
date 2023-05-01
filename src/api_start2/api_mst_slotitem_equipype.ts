@@ -266,6 +266,11 @@
     api_show_flg: 0,
   },
   {
+    api_id: 54,
+    api_name: "水上艦装備",
+    api_show_flg: 0,
+  },
+  {
     api_id: 56,
     api_name: "噴式戦闘機",
     api_show_flg: 0,
