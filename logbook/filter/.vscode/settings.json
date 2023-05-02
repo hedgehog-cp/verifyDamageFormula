@@ -1,0 +1,17 @@
+{
+  // ----ユーザーの設定----
+  // ctrl + , で開いたsettings.jsonに追記
+  // ワークスペースで設定しても無意味なのでコメントアウト
+  //"files.associations": {
+  //  "*.hjson": "jsonc"
+  //},
+
+  // ----ワークスペースの設定----
+  "[csv]": {
+    "files.encoding": "shiftjis"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.formatOnSave": true
+  }
+}
