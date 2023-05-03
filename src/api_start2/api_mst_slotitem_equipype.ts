@@ -1,4 +1,5 @@
 // https://raw.githubusercontent.com/Tibowl/api_start2/master/parsed/api_mst_slotitem_equiptype.json
+// 装備種3; カテゴリ
 /*export*/ const api_mst_slotitem_equiptype = [
   {
     api_id: 1,
