@@ -117,6 +117,9 @@ const MST_CLASS_TYPE: { [key: number]: string } = {
   116: "Independence級",
   117: "鵜来型",
   118: "Ranger級",
+  119: "特種船M丙型",
+  120: "二等輸送艦",
+  121: "New Orleans級",
 } as const;
 
-type ctype = typeof MST_CLASS_TYPE[keyof typeof MST_CLASS_TYPE];
+type ctype = (typeof MST_CLASS_TYPE)[keyof typeof MST_CLASS_TYPE];

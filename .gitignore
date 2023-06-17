@@ -1,3 +1,4 @@
 .clasp.json
 package-lock.json
 node_modules/
+logbook/script/sample

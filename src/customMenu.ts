@@ -15,6 +15,15 @@ function onOpen(event) {
       name: "二分法による下限第3種加算補正値探索",
       functionName: "b3BinarySearch",
     },
+    {
+      //name: "インポート_新規",
+      name: "インポート",
+      functionName: "importCSVFromSameFolderNew",
+    },
+    //{
+    //  name: "インポート_追記",
+    //  functionName: "importCSVFromSameFolderAppend"
+    //}
   ];
   let sheet = SpreadsheetApp.getActiveSpreadsheet();
   sheet.addMenu("スクリプト", menuItems);
@@ -164,4 +173,48 @@ function b3BinarySearch() {
 
     if (Math.abs(temp_acc - mid) < accuracy && temp_is) break;
   }
+}
+
+function importCSVFromSameFolderNew() {
+  const csvDataArray = getCSVDataArrayFromSameFolder(false);
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const numColumns = csvDataArray[0][0].length;
+  const numRows = csvDataArray.flat().length;
+
+  sheet.getRange(1, 1, numRows, numColumns).setValues(csvDataArray.flat());
+}
+
+function importCSVFromSameFolderAppend() {
+  const csvDataArray = getCSVDataArrayFromSameFolder(true);
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const numColumns = csvDataArray[0][0].length;
+  const numRows = csvDataArray.flat().length;
+
+  sheet
+    .getRange(sheet.getLastRow() + 1, 1, numRows, numColumns)
+    .setValues(csvDataArray.flat());
+}
+
+function getCSVDataArrayFromSameFolder(isRemoveAllHeader: boolean) {
+  const spreadsheetId = SpreadsheetApp.getActiveSpreadsheet().getId();
+  const spreadsheetFile = DriveApp.getFileById(spreadsheetId);
+  const spreadsheetFolder = spreadsheetFile.getParents().next();
+  const files = spreadsheetFolder.getFilesByType(MimeType.CSV);
+
+  const csvDataArray = [];
+
+  while (files.hasNext()) {
+    const csvData = files.next().getBlob().getDataAsString("Shift-JIS");
+    const csv = Utilities.parseCsv(
+      Utilities.newBlob(csvData, "Shift-JIS").getDataAsString("UTF-8")
+    );
+
+    if (isRemoveAllHeader || csvDataArray.length > 0) {
+      csv.shift();
+    }
+
+    csvDataArray.push(csv);
+  }
+
+  return csvDataArray;
 }
