@@ -1,5 +1,3 @@
-# test
+# 赤仮
 
-Hello World!
-[sub](sub.md)
-[sub](./sub.md)
+[赤仮](./akakari.md)
