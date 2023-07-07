@@ -474,18 +474,14 @@ function calcAswBonus(attacker: AswAttacker) {
   // 438  https://wikiwiki.jp/kancolle/三式水中探信儀改
   if ((num = attacker.gearCount("三式水中探信儀改"))) {
     if (
-      [
-        "かみかぜ",
-        "はるかぜ",
-        "しぐれ",
-        "やまかぜ",
-        "まいかぜ",
-        "あさしも",
-      ].includes(attacker.yomi)
+      ["かみかぜ", "はるかぜ", "しぐれ", "やまかぜ", "まいかぜ"].includes(
+        attacker.yomi
+      )
     ) {
+      attacker.bonus += 4 * num;
+    } else if (attacker.yomi === "あさしも") {
       attacker.bonus += 3 * num;
-    }
-    if (
+    } else if (
       [
         "うしお",
         "いかずち",
