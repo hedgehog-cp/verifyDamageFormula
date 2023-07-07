@@ -474,12 +474,15 @@ function calcAswBonus(attacker: AswAttacker) {
   // 438  https://wikiwiki.jp/kancolle/三式水中探信儀改
   if ((num = attacker.gearCount("三式水中探信儀改"))) {
     if (
-      ["かみかぜ", "はるかぜ", "しぐれ", "やまかぜ", "まいかぜ"].includes(
-        attacker.yomi
-      )
+      [
+        "かみかぜ",
+        "はるかぜ",
+        "しぐれ",
+        "やまかぜ",
+        "まいかぜ",
+        "あさしも",
+      ].includes(attacker.yomi)
     ) {
-      attacker.bonus += 4 * num;
-    } else if (attacker.yomi === "あさしも") {
       attacker.bonus += 3 * num;
     } else if (
       [
@@ -720,6 +723,8 @@ function calcAswBonus(attacker: AswAttacker) {
   if (attacker.gearCount("三式水中探信儀改")) {
     if (["那珂改二", "由良改二", "五十鈴改二"].includes(attacker.name)) {
       attacker.bonus += 1;
+    } else if (["みくら", "いしがき"].includes(attacker.yomi)) {
+      attacker.bonus += 1;
     } else if (attacker.nationality === "日本" && attacker.stype === "駆逐艦") {
       attacker.bonus += 1;
     }
@@ -744,15 +749,16 @@ function calcAswBonus(attacker: AswAttacker) {
         "やまかぜ",
         "かみかぜ",
         "はるかぜ",
-        "みくら",
-        "いしがき",
+        //"みくら",
+        //"いしがき",
       ].includes(attacker.yomi)
     ) {
       attacker.bonus += 1;
     }
     if (
       [
-        "時雨改二",
+        "時雨改二", //?
+        "時雨改三",
         "春風改",
         "神風改",
         "朝霜改二",
