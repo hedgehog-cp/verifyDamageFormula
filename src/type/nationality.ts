@@ -120,6 +120,10 @@ const MST_NATIONALITY: { [key: number]: string } = {
   119: "日本",
   120: "日本",
   121: "アメリカ",
+  122: "アメリカ",
+  123: "日本",
+  124: "イタリア",
+  125: "アメリカ",
 } as const;
 
 type nationality = (typeof MST_NATIONALITY)[keyof typeof MST_NATIONALITY];

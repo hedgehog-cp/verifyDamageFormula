@@ -4,7 +4,7 @@
 
 ## documents
 
-PDF 形式の定義文書や覚書とそのソースがあります.  
+PDF 形式の定義文書や覚書とそのソースがあります.
 PDF ファイルを LaTeX から編集するには, //あとで書く
 
 ## logbook/filter
@@ -24,4 +24,6 @@ TypeScript なので, 予め Node.js とか npm とか入れておく必要が�
 
 - [google-clasp](https://github.com/google/clasp)
 - [clasp-guides](https://developers.google.com/apps-script/guides/clasp?hl=ja)
-- [GAS を TypeScript で使う方法](https://www.oit.ac.jp/rd/labs/kobayashi-lab/~yagshi/gasts.html)
+- [GAS を TypeScript で使う方法](https://www.oit.ac.jp/rd/labs/kobayashi-lab/~yagshi/articles/gasts/)
+
+`Error retrieving access token: Error: invalid_grant`というエラーが出た場合、`clasp login`を試してください。

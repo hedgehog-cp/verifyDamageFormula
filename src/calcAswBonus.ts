@@ -156,7 +156,7 @@ function calcAswBonus(attacker: AswAttacker) {
   if ((num = attacker.gearCount("三式爆雷投射機 集中配備"))) {
     if (attacker.ctype === "香取型") {
       attacker.bonus += 3 * num;
-    } else if (attacker.name === "能代改二") {
+    } else if (["能代改二", "時雨改三"].includes(attacker.name)) {
       attacker.bonus += 3 * num;
     } else if (
       ["夕張改二丁", "五十鈴改二", "那珂改二", "由良改二", "雪風改二"].includes(
@@ -177,7 +177,7 @@ function calcAswBonus(attacker: AswAttacker) {
       attacker.bonus += 2 * num;
     } else if (attacker.name === "夕張改二丁") {
       attacker.bonus = 3 * num;
-    } else if (attacker.name === "能代改二") {
+    } else if (["能代改二", "時雨改三"].includes(attacker.name)) {
       attacker.bonus += 4 * num;
     }
   }
@@ -595,14 +595,50 @@ function calcAswBonus(attacker: AswAttacker) {
 
   //  489 https://wikiwiki.jp/kancolle/一式戦%20隼II型改(20戦隊)
   if ((num = attacker.gearCount("一式戦 隼II型改(20戦隊)"))) {
-    if (attacker.yomi === "やましおまる") {
+    if (attacker.yomi === "あきつまる") {
+      attacker.bonus += num;
+    } else if (["やましおまる", "くまのまる"].includes(attacker.yomi)) {
       attacker.bonus += num;
       attacker.bonus += attacker.isKai ? num : 0;
-    } else if (attacker.yomi === "あきつまる") {
-      attacker.bonus += num;
     }
     const rfs: number[] = attacker.gearRfs("一式戦 隼II型改(20戦隊)");
     attacker.bonus += rfs.reduce((v1, v2) => v1 + (v2 >= 6 ? 1 : 0), 0);
+  }
+
+  //  491 https://wikiwiki.jp/kancolle/一式戦%20隼III型改%28熟練／20戦隊%29
+  if ((num = attacker.gearCount("一式戦 隼III型改(熟練/20戦隊)"))) {
+    if (attacker.yomi === "あきつまる") {
+      attacker.bonus += num;
+    } else if (["やましおまる", "くまのまる"].includes(attacker.yomi)) {
+      attacker.bonus += num;
+      attacker.bonus += attacker.isKai ? num : 0;
+    }
+    // const rfs: number[] = attacker.gearRfs("一式戦 隼II型改(20戦隊)");
+    // attacker.bonus += rfs.reduce((v1, v2) => v1 + (v2 >= 6 ? 1 : 0), 0);
+  }
+
+  // 509 https://wikiwiki.jp/kancolle/12cm単装高角砲E型改
+  if ((num = attacker.gearCount("12cm単装高角砲E型改"))) {
+    if (attacker.stype === "海防艦") {
+      attacker.bonus += num;
+    }
+  }
+
+  // 510 https://wikiwiki.jp/kancolle/Walrus
+  if ((num = attacker.gearCount("Walrus"))) {
+    if (attacker.nationality === "イギリス") {
+      attacker.bonus += 3 * num;
+    }
+  }
+
+  // 518 https://wikiwiki.jp/kancolle/14cm連装砲改二
+  if ((num = attacker.gearCount("14cm連装砲改二"))) {
+    if (attacker.yomi === "ゆうばり" && attacker.isKai2) {
+      attacker.bonus += 2 * num;
+      attacker.bonus += attacker.name === "夕張改二丁" ? 2 * num : 0;
+    } else if (attacker.ctype === "香取型") {
+      attacker.bonus += num;
+    }
   }
 
   //-------------------------------------------------------------------------//

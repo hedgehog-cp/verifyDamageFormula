@@ -159,7 +159,7 @@
   {
     api_id: 32,
     api_name: "潜水艦魚雷",
-    api_show_flg: 1,
+    api_show_flg: 0,
   },
   {
     api_id: 33,
